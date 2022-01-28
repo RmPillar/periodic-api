@@ -1,13 +1,8 @@
-import { Knex } from "knex";
+import { BaseConfigType, CustomConfigType } from "./types/config";
 
 const { DB_URL, NODE_ENV = "development" } = process.env;
 
-type customConfigType = {
-  production: Knex.Config;
-  development: Knex.Config;
-};
-
-const baseConfig: Knex.Config = {
+const baseConfig: BaseConfigType = {
   client: "pg",
   migrations: {
     directory: "./db/migrations",
@@ -17,7 +12,7 @@ const baseConfig: Knex.Config = {
   },
 };
 
-const customConfig: customConfigType = {
+const customConfig: CustomConfigType = {
   production: {
     connection: `${DB_URL}?ssl=true`,
   },
