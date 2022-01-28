@@ -1,4 +1,5 @@
 import { Knex } from "knex";
+import elementData from "../data/elements";
 
 exports.seed = function (knex: Knex) {
   return knex.migrate

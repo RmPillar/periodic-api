@@ -1,36 +1,14 @@
+import { Knex } from "knex";
+
 const { DB_URL, NODE_ENV = "development" } = process.env;
-const ENV = process.env.NODE_ENV || "development";
 
 type customConfigType = {
-  production: {
-    connection: String;
-  };
-  development: {
-    connection: {
-      database: String;
-    };
-  };
-  test: {
-    connection: {
-      database: String;
-    };
-  };
+  production: Knex.Config;
+  development: Knex.Config;
 };
 
-type baseConfigType = {
-  client: String;
-  ssl: Boolean;
-  migrations: {
-    directory: String;
-  };
-  seeds: {
-    directory: String;
-  };
-};
-
-const baseConfig: baseConfigType = {
+const baseConfig: Knex.Config = {
   client: "pg",
-  ssl: true,
   migrations: {
     directory: "./db/migrations",
   },
@@ -48,16 +26,11 @@ const customConfig: customConfigType = {
       database: "periodic",
     },
   },
-  test: {
-    connection: {
-      database: "periodic_test",
-    },
-  },
 };
 
 const config =
-  ENV === "production" || ENV === "development" || ENV === "test"
-    ? customConfig[ENV]
+  NODE_ENV === "production" || NODE_ENV === "development"
+    ? customConfig[NODE_ENV]
     : customConfig.development;
 
-module.exports = { ...config, ...baseConfig };
+export default { ...config, ...baseConfig };

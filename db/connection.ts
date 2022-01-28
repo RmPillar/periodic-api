@@ -1,4 +1,5 @@
-const connection = require("knex");
+import connection from "knex";
+import knexfile from "../knexfile";
 
 const dbConfig =
   process.env.NODE_ENV === "production"
@@ -7,6 +8,6 @@ const dbConfig =
         connection: process.env.DATABASE_URL,
         connectTimeout: 90000,
       }
-    : require("../knexfile");
+    : knexfile;
 
-module.exports = connection(dbConfig);
+export default connection(dbConfig);
