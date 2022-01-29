@@ -1,3 +1,3 @@
-const elementData = require("./elements");
+import elementData from "./elements";
 
-module.exports = { elementData };
+export default { elementData };

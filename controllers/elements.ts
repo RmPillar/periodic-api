@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { fetchElements } from "../models/elements";
+import { ElementType } from "../types/data";
 
 export const getElements = (
   req: Request,
@@ -7,8 +8,8 @@ export const getElements = (
   next: NextFunction
 ) => {
   fetchElements()
-    .then((elements: unknown) => {
-      res.status(200).send({ elements });
+    .then((elements: ElementType[]) => {
+      res.status(200).send(elements);
     })
     .catch(next);
 };
