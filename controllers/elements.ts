@@ -3,11 +3,11 @@ import { fetchElements } from "../models/elements";
 import { ElementType } from "../types/data";
 
 export const getElements = (
-  req: Request,
+  { query }: Request,
   res: Response,
   next: NextFunction
-) => {
-  fetchElements()
+): void => {
+  fetchElements(query)
     .then((elements: ElementType[]) => {
       res.status(200).send(elements);
     })
