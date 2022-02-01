@@ -21,7 +21,20 @@ describe("/api", () => {
           "name",
           "symbol",
           "proton_number",
-          "mass"
+          "mass",
+          "group",
+          "period",
+          "block",
+          "state_room_temp",
+          "melting_point",
+          "boiling_point",
+          "density",
+          "appearance",
+          "discovery_date",
+          "discovered_by",
+          "name_origin",
+          "uses",
+          "electron_configuration"
         );
       });
       it("Status 200: returns all elements in database ordered by id in ascending order by default", async () => {
