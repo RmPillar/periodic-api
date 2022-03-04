@@ -3,7 +3,7 @@ import { ElementType } from "../types/data";
 import { fetchElementsTypes } from "../types/models";
 import { getSign } from "../utils";
 
-export const fetchElements = ({
+export const fetchElements = async ({
   sort_by = "element_id",
   order = "asc",
   limit = 10,
@@ -16,8 +16,8 @@ export const fetchElements = ({
   boiling_point,
   density,
   mass,
-}: fetchElementsTypes): Promise<ElementType[]> => {
-  return connection("elements")
+}: fetchElementsTypes) => {
+  const elements = await connection("elements")
     .select("*")
     .modify((query) => {
       if (group) {
@@ -113,4 +113,38 @@ export const fetchElements = ({
     })
     .limit(limit)
     .orderBy(sort_by, order);
+
+  const isotopes = await connection("isotopes").select(
+    "isotope_id",
+    "element_id",
+    "name",
+    "mass",
+    "natural_abundance",
+    "half_life"
+  );
+
+  return elements.map((element) => {
+    return {
+      ...element,
+      isotopes: isotopes.filter(
+        (isotope) => isotope.element_id === element.element_id
+      ),
+    };
+  });
+};
+
+export const fetchElementsById = (
+  element_id: string
+): Promise<ElementType[]> => {
+  return connection("elements")
+    .select("*")
+    .where({ element_id })
+    .then((elements) => {
+      if (elements.length === 0) {
+        return Promise.reject({
+          status: 404,
+          msg: "Element Not Found",
+        });
+      } else return elements;
+    });
 };

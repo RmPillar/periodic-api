@@ -296,5 +296,51 @@ describe("/api", () => {
         expect(body.msg).to.be.equal("Bad Request!!");
       });
     });
+    describe("/:element_id", () => {
+      describe("GET", () => {
+        it("Status 200: returns requested element", async () => {
+          const { body } = await request(app)
+            .get("/api/elements/1")
+            .expect(200);
+
+          expect(body).to.be.an("array");
+          expect(body[0]).to.include.keys(
+            "element_id",
+            "name",
+            "symbol",
+            "proton_number",
+            "mass",
+            "group",
+            "period",
+            "block",
+            "state_room_temp",
+            "melting_point",
+            "boiling_point",
+            "density",
+            "appearance",
+            "discovery_date",
+            "discovered_by",
+            "name_origin",
+            "uses",
+            "electron_configuration"
+          );
+          expect(body[0].element_id).to.be.equal(1);
+        });
+        it("Status 404: responds with not found when requested element does not exist", async () => {
+          const { body } = await request(app)
+            .get("/api/elements/999999")
+            .expect(404);
+
+          expect(body.msg).to.be.equal("Element Not Found");
+        });
+        it("Status: 400 responds with bad request when element id is not a number", async () => {
+          const { body } = await request(app)
+            .get("/api/elements/t")
+            .expect(400);
+
+          expect(body.msg).to.be.equal("Bad Request!!");
+        });
+      });
+    });
   });
 });

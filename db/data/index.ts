@@ -1,3 +1,4 @@
 import elementData from "./elements";
+import isotopeData from "./isotopes";
 
-export default { elementData };
+export { elementData, isotopeData };
