@@ -16,3 +16,16 @@ export const getSign = (sign: getSignArgs): getSignReturn => {
       return "=";
   }
 };
+
+export const modifyQuery = (param, field, query) => {
+  const splitDate = param.split("_");
+  splitDate.forEach((val) => {
+    if (val.includes("-")) {
+      const [comparison, value] = val.split("-");
+      const sign = getSign(comparison);
+      query.where(field, sign, value);
+    } else {
+      query.where(field, "=", val);
+    }
+  });
+};

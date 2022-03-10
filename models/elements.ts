@@ -1,7 +1,7 @@
 import connection from "../db/connection";
 import { ElementType } from "../types/data";
 import { fetchElementsTypes } from "../types/models";
-import { getSign } from "../utils";
+import { getSign, modifyQuery } from "../utils";
 
 export const fetchElements = async ({
   sort_by = "element_id",
@@ -16,99 +16,40 @@ export const fetchElements = async ({
   boiling_point,
   density,
   mass,
+  neutron_number,
 }: fetchElementsTypes) => {
   const elements = await connection("elements")
     .select("*")
     .modify((query) => {
       if (group) {
-        const splitDate = group.split("_");
-        splitDate.forEach((val) => {
-          if (val.includes("-")) {
-            const [comparison, value] = val.split("-");
-            const sign = getSign(comparison);
-            query.where("group", sign, value);
-          } else {
-            query.where("group", "=", val);
-          }
-        });
+        modifyQuery(group, "group", query);
       }
       if (period) {
-        const splitDate = period.split("_");
-        splitDate.forEach((val) => {
-          if (val.includes("-")) {
-            const [comparison, value] = val.split("-");
-            const sign = getSign(comparison);
-            query.where("period", sign, value);
-          } else {
-            query.where("period", "=", val);
-          }
-        });
+        modifyQuery(period, "period", query);
       }
       if (block) {
         query.where({ block });
       }
       if (discovery_date) {
-        const splitDate = discovery_date.split("_");
-        splitDate.forEach((date) => {
-          if (date.includes("-")) {
-            const [comparison, value] = date.split("-");
-            const sign = getSign(comparison);
-            query.where("discovery_date", sign, value);
-          } else {
-            query.where("discovery_date", "=", date);
-          }
-        });
+        modifyQuery(discovery_date, "discovery_date", query);
       }
       if (state_room_temp) {
         query.where({ state_room_temp });
       }
       if (melting_point) {
-        const splitDate = melting_point.split("_");
-        splitDate.forEach((temp) => {
-          if (temp.includes("-")) {
-            const [comparison, value] = temp.split("-");
-            const sign = getSign(comparison);
-            query.where("melting_point", sign, value);
-          } else {
-            query.where("melting_point", "=", temp);
-          }
-        });
+        modifyQuery(melting_point, "melting_point", query);
       }
       if (boiling_point) {
-        const splitDate = boiling_point.split("_");
-        splitDate.forEach((temp) => {
-          if (temp.includes("-")) {
-            const [comparison, value] = temp.split("-");
-            const sign = getSign(comparison);
-            query.where("boiling_point", sign, value);
-          } else {
-            query.where("boiling_point", "=", temp);
-          }
-        });
+        modifyQuery(boiling_point, "boiling_point", query);
       }
       if (density) {
-        const splitDate = density.split("_");
-        splitDate.forEach((val) => {
-          if (val.includes("-")) {
-            const [comparison, value] = val.split("-");
-            const sign = getSign(comparison);
-            query.where("density", sign, value);
-          } else {
-            query.where("density", "=", val);
-          }
-        });
+        modifyQuery(density, "density", query);
       }
       if (mass) {
-        const splitDate = mass.split("_");
-        splitDate.forEach((val) => {
-          if (val.includes("-")) {
-            const [comparison, value] = val.split("-");
-            const sign = getSign(comparison);
-            query.where("mass", sign, value);
-          } else {
-            query.where("mass", "=", val);
-          }
-        });
+        modifyQuery(mass, "mass", query);
+      }
+      if (neutron_number) {
+        modifyQuery(neutron_number, "neutron_number", query);
       }
     })
     .limit(limit)

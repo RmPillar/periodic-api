@@ -21,6 +21,7 @@ describe("/api", () => {
           "name",
           "symbol",
           "proton_number",
+          "neutron_number",
           "mass",
           "group",
           "period",
@@ -34,7 +35,17 @@ describe("/api", () => {
           "discovered_by",
           "name_origin",
           "uses",
-          "electron_configuration"
+          "electron_configuration",
+          "isotopes"
+        );
+        expect(body[0].isotopes).to.be.an("array");
+        expect(body[0].isotopes[0]).include.keys(
+          "element_id",
+          "isotope_id",
+          "name",
+          "mass",
+          "natural_abundance",
+          "half_life"
         );
       });
       it("Status 200: returns all elements in database ordered by id in ascending order by default", async () => {
@@ -277,7 +288,7 @@ describe("/api", () => {
 
         expect(dates).to.be.true;
       });
-      it("Status 200: returns all elements with with mass between queried densities", async () => {
+      it("Status 200: returns all elements with with mass between queried mass", async () => {
         const { body } = await request(app)
           .get("/api/elements?mass=gt-10_lt-20")
           .expect(200);
@@ -287,6 +298,26 @@ describe("/api", () => {
         );
 
         expect(dates).to.be.true;
+      });
+      it("Status 200: returns all elements with with neutron number above queried neutron number", async () => {
+        const { body } = await request(app)
+          .get("/api/elements?neutron_number=gt-10")
+          .expect(200);
+
+        const neutronNumbers = body.every((item) => item.neutron_number > 10);
+
+        expect(neutronNumbers).to.be.true;
+      });
+      it("Status 200: returns all elements with with neutron number between queried neutron number", async () => {
+        const { body } = await request(app)
+          .get("/api/elements?neutron_number=gt-10_lt-20")
+          .expect(200);
+
+        const neutronNumbers = body.every(
+          (item) => item.neutron_number > 0.000082 && item.neutron_number < 20
+        );
+
+        expect(neutronNumbers).to.be.true;
       });
       it("Status: 400 responds with bad request when sort_by query has a non-existant column", async () => {
         const { body } = await request(app)
@@ -340,6 +371,115 @@ describe("/api", () => {
 
           expect(body.msg).to.be.equal("Bad Request!!");
         });
+      });
+    });
+  });
+  describe("/isotopes", () => {
+    describe("GET", () => {
+      it("Status 200: returns all isotopes", async () => {
+        const { body } = await request(app).get("/api/isotopes").expect(200);
+
+        expect(body).to.be.an("array");
+        expect(body[0]).to.include.keys(
+          "element_id",
+          "isotope_id",
+          "name",
+          "mass",
+          "natural_abundance",
+          "half_life"
+        );
+      });
+      it("Status 200: returns all isotopes in database ordered by id in ascending order by default", async () => {
+        const { body } = await request(app).get("/api/isotopes").expect(200);
+
+        // @ts-ignore
+        expect(body).to.be.sortedBy("isotope_id", { ascending: true });
+      });
+      it("Status 200: returns all isotopes in database ordered by sort_by query, in ascending order by default", async () => {
+        const { body } = await request(app)
+          .get("/api/isotopes?sort_by=name")
+          .expect(200);
+
+        // @ts-ignore
+        expect(body).to.be.ascendingBy("name");
+      });
+      it("Status 200: returns all isotopes in database ordered sort_by query, in order query", async () => {
+        const { body } = await request(app)
+          .get("/api/isotopes?sort_by=name&order=desc")
+          .expect(200);
+
+        // @ts-ignore
+        expect(body).to.be.descendingBy("name");
+      });
+      it("Status 200: returns first 10 isotopes in database by default", async () => {
+        const { body } = await request(app).get("/api/isotopes").expect(200);
+
+        expect(body).to.have.length(10);
+      });
+      it("Status 200: returns number of isotopes specified in limit query", async () => {
+        const { body } = await request(app)
+          .get("/api/isotopes?limit=5")
+          .expect(200);
+
+        expect(body).to.have.length(5);
+      });
+      it("Status 200: returns all isotopes with queried mass", async () => {
+        const { body } = await request(app)
+          .get("/api/isotopes?mass=4")
+          .expect(200);
+
+        const mass = body.every((item) => item.mass == 4);
+
+        expect(mass).to.be.true;
+      });
+      it("Status 200: returns all isotopes with with mass above queried mass", async () => {
+        const { body } = await request(app)
+          .get("/api/isotopes?mass=gt-10")
+          .expect(200);
+
+        const dates = body.every((item) => item.mass > 10);
+
+        expect(dates).to.be.true;
+      });
+      it("Status 200: returns all isotopes with queried natural abundance", async () => {
+        const { body } = await request(app)
+          .get("/api/isotopes?natural_abundance=100")
+          .expect(200);
+
+        const natural_abundance = body.every(
+          (item) => item.natural_abundance == 100
+        );
+
+        expect(natural_abundance).to.be.true;
+      });
+      it("Status 200: returns all isotopes with with natural abundance above queried natural abundance", async () => {
+        const { body } = await request(app)
+          .get("/api/isotopes?natural_abundance=gt-10")
+          .expect(200);
+
+        const natural_abundance = body.every(
+          (item) => item.natural_abundance > 10
+        );
+
+        expect(natural_abundance).to.be.true;
+      });
+      it("Status 200: returns all isotopes with queried neutron number", async () => {
+        const { body } = await request(app)
+          .get("/api/isotopes?neutron_number=100")
+          .expect(200);
+
+        const neutron_number = body.every((item) => item.neutron_number == 100);
+
+        expect(neutron_number).to.be.true;
+      });
+      it("Status 200: returns all isotopes with with neutron number above queried neutron number", async () => {
+        const { body } = await request(app)
+          .get("/api/isotopes?neutron_number=gt-10")
+          .expect(200);
+
+        const neutron_number = body.every((item) => item.neutron_number > 10);
+
+        expect(neutron_number).to.be.true;
       });
     });
   });
