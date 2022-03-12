@@ -73,6 +73,9 @@ export const fetchElements = async ({
 
   const isotopes = await connection("isotopes").select("*");
   const oxidationStates = await connection("oxidation_states").select("*");
+  const ionisationEnergies = await connection("ionisation_energies").select(
+    "*"
+  );
 
   return elements.map((element) => {
     return {
@@ -82,6 +85,9 @@ export const fetchElements = async ({
       ),
       oxidation_states: oxidationStates.filter(
         (oxidationState) => oxidationState.element_id === element.element_id
+      ),
+      ionisation_energies: ionisationEnergies.filter(
+        (ionisationEnergy) => ionisationEnergy.element_id === element.element_id
       ),
     };
   });

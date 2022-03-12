@@ -11,7 +11,7 @@ after(() => connection.destroy());
 
 describe("/api", () => {
   describe("/elements", () => {
-    describe.only("GET", () => {
+    describe("GET", () => {
       it("Status 200: returns all elements in database", async () => {
         const { body } = await request(app).get("/api/elements").expect(200);
 
@@ -38,10 +38,16 @@ describe("/api", () => {
           "electron_configuration",
           "isotopes",
           "oxidation_states",
-          "classification"
+          "classification",
+          "atomic_radius",
+          "covalent_radius",
+          "electron_affinity",
+          "electronegativity",
+          "ionisation_energies"
         );
         expect(body[0].isotopes).to.be.an("array");
         expect(body[0].oxidation_states).to.be.an("array");
+        expect(body[0].ionisation_energies).to.be.an("array");
         expect(body[0].isotopes[0]).include.keys(
           "element_id",
           "isotope_id",
@@ -54,6 +60,12 @@ describe("/api", () => {
           "element_id",
           "oxidation_state_id",
           "oxidation_state"
+        );
+        expect(body[0].ionisation_energies[0]).include.keys(
+          "element_id",
+          "ionisation_energy_id",
+          "ionisation_energy",
+          "position"
         );
       });
       it("Status 200: returns all elements in database ordered by id in ascending order by default", async () => {
