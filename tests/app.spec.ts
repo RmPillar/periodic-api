@@ -11,7 +11,7 @@ after(() => connection.destroy());
 
 describe("/api", () => {
   describe("/elements", () => {
-    describe("GET", () => {
+    describe.only("GET", () => {
       it("Status 200: returns all elements in database", async () => {
         const { body } = await request(app).get("/api/elements").expect(200);
 
@@ -36,9 +36,12 @@ describe("/api", () => {
           "name_origin",
           "uses",
           "electron_configuration",
-          "isotopes"
+          "isotopes",
+          "oxidation_states",
+          "classification"
         );
         expect(body[0].isotopes).to.be.an("array");
+        expect(body[0].oxidation_states).to.be.an("array");
         expect(body[0].isotopes[0]).include.keys(
           "element_id",
           "isotope_id",
@@ -46,6 +49,11 @@ describe("/api", () => {
           "mass",
           "natural_abundance",
           "half_life"
+        );
+        expect(body[0].oxidation_states[0]).include.keys(
+          "element_id",
+          "oxidation_state_id",
+          "oxidation_state"
         );
       });
       it("Status 200: returns all elements in database ordered by id in ascending order by default", async () => {
@@ -310,14 +318,100 @@ describe("/api", () => {
       });
       it("Status 200: returns all elements with with neutron number between queried neutron number", async () => {
         const { body } = await request(app)
-          .get("/api/elements?neutron_number=gt-10_lt-20")
+          .get("/api/elements?neutron_number=gt-5_lt-10")
           .expect(200);
 
         const neutronNumbers = body.every(
-          (item) => item.neutron_number > 0.000082 && item.neutron_number < 20
+          (item) => item.neutron_number > 5 && item.neutron_number < 10
         );
 
         expect(neutronNumbers).to.be.true;
+      });
+      it("Status 200: returns all elements with with atomic radius above queried atomic radius", async () => {
+        const { body } = await request(app)
+          .get("/api/elements?atomic_radius=gt-1.5")
+          .expect(200);
+
+        const atomicRadius = body.every((item) => item.atomic_radius > 1.5);
+
+        expect(atomicRadius).to.be.true;
+      });
+      it("Status 200: returns all elements with with atomic radius between queried atomic radius", async () => {
+        const { body } = await request(app)
+          .get("/api/elements?atomic_radius=gt-1.5_lt-1.6")
+          .expect(200);
+
+        const atomicRadius = body.every(
+          (item) => item.atomic_radius > 1.5 && item.atomic_radius < 1.6
+        );
+
+        expect(atomicRadius).to.be.true;
+      });
+      it("Status 200: returns all elements with with convalent radius above queried convalent radius", async () => {
+        const { body } = await request(app)
+          .get("/api/elements?covalent_radius=gt-0.32")
+          .expect(200);
+
+        const convalentRadius = body.every(
+          (item) => item.covalent_radius > 0.32
+        );
+
+        expect(convalentRadius).to.be.true;
+      });
+      it("Status 200: returns all elements with with convalent radius between queried convalent radius", async () => {
+        const { body } = await request(app)
+          .get("/api/elements?covalent_radius=gt-0.32_lt-1")
+          .expect(200);
+
+        const convalentRadius = body.every(
+          (item) => item.covalent_radius > 0.32 && item.covalent_radius < 1
+        );
+
+        expect(convalentRadius).to.be.true;
+      });
+      it("Status 200: returns all elements with with electron affinity above queried electron affinity", async () => {
+        const { body } = await request(app)
+          .get("/api/elements?electron_affinity=gt-60")
+          .expect(200);
+
+        const convalentRadius = body.every(
+          (item) => item.electron_affinity > 60
+        );
+
+        expect(convalentRadius).to.be.true;
+      });
+      it("Status 200: returns all elements with with electron affinity between queried electron affinity", async () => {
+        const { body } = await request(app)
+          .get("/api/elements?electron_affinity=gt-60_lt-120")
+          .expect(200);
+
+        const convalentRadius = body.every(
+          (item) => item.electron_affinity > 60 && item.electron_affinity < 120
+        );
+
+        expect(convalentRadius).to.be.true;
+      });
+      it("Status 200: returns all elements with with electronegativity above queried electronegativity", async () => {
+        const { body } = await request(app)
+          .get("/api/elements?electronegativity=gt-1")
+          .expect(200);
+
+        const convalentRadius = body.every(
+          (item) => item.electronegativity > 1
+        );
+
+        expect(convalentRadius).to.be.true;
+      });
+      it("Status 200: returns all elements with with electronegativity between queried electronegativity", async () => {
+        const { body } = await request(app)
+          .get("/api/elements?electronegativity=gt-1_lt-3")
+          .expect(200);
+
+        const convalentRadius = body.every(
+          (item) => item.electronegativity > 1 && item.electronegativity < 3
+        );
+
+        expect(convalentRadius).to.be.true;
       });
       it("Status: 400 responds with bad request when sort_by query has a non-existant column", async () => {
         const { body } = await request(app)

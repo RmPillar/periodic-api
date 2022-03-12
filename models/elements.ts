@@ -1,7 +1,7 @@
 import connection from "../db/connection";
 import { ElementType } from "../types/data";
 import { fetchElementsTypes } from "../types/models";
-import { getSign, modifyQuery } from "../utils";
+import { modifyQuery } from "../utils";
 
 export const fetchElements = async ({
   sort_by = "element_id",
@@ -17,6 +17,10 @@ export const fetchElements = async ({
   density,
   mass,
   neutron_number,
+  atomic_radius,
+  covalent_radius,
+  electron_affinity,
+  electronegativity,
 }: fetchElementsTypes) => {
   const elements = await connection("elements")
     .select("*")
@@ -51,24 +55,33 @@ export const fetchElements = async ({
       if (neutron_number) {
         modifyQuery(neutron_number, "neutron_number", query);
       }
+      if (atomic_radius) {
+        modifyQuery(atomic_radius, "atomic_radius", query);
+      }
+      if (covalent_radius) {
+        modifyQuery(covalent_radius, "covalent_radius", query);
+      }
+      if (electron_affinity) {
+        modifyQuery(electron_affinity, "electron_affinity", query);
+      }
+      if (electronegativity) {
+        modifyQuery(electronegativity, "electronegativity", query);
+      }
     })
     .limit(limit)
     .orderBy(sort_by, order);
 
-  const isotopes = await connection("isotopes").select(
-    "isotope_id",
-    "element_id",
-    "name",
-    "mass",
-    "natural_abundance",
-    "half_life"
-  );
+  const isotopes = await connection("isotopes").select("*");
+  const oxidationStates = await connection("oxidation_states").select("*");
 
   return elements.map((element) => {
     return {
       ...element,
       isotopes: isotopes.filter(
         (isotope) => isotope.element_id === element.element_id
+      ),
+      oxidation_states: oxidationStates.filter(
+        (oxidationState) => oxidationState.element_id === element.element_id
       ),
     };
   });

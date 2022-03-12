@@ -21,6 +21,10 @@ export default [
     name_origin:
       "The name is derived from the Greek 'hydro' and 'genes' meaning water forming.",
     electron_configuration: "1s^1",
+    atomic_radius: 1.1,
+    covalent_radius: 0.32,
+    electron_affinity: 72.769,
+    electronegativity: 2.2,
   },
   {
     name: "Helium",
@@ -42,6 +46,8 @@ export default [
     name_origin:
       "TThe name is derived from the Greek, 'helios' meaning sun, as it was in the sun's corona that helium was first detected. ",
     electron_configuration: "1s^2",
+    atomic_radius: 1.4,
+    covalent_radius: 0.37,
   },
   {
     name: "Lithium",
@@ -64,6 +70,10 @@ export default [
     discovered_by: "Johan August Arfvedson",
     name_origin: "The name is derived from the Greek 'lithos' meaning stone.",
     electron_configuration: "[He] 2s^1",
+    atomic_radius: 1.82,
+    covalent_radius: 1.3,
+    electron_affinity: 59.633,
+    electronegativity: 0.98,
   },
   {
     name: "Beryllium",
@@ -87,6 +97,9 @@ export default [
     name_origin:
       "The name is derived from the Greek name for beryl, 'beryllo'.",
     electron_configuration: "[He] 2s^2",
+    atomic_radius: 1.53,
+    covalent_radius: 0.99,
+    electronegativity: 1.57,
   },
   {
     name: "Boron",
@@ -110,6 +123,10 @@ export default [
     name_origin:
       "The name is derived from the Arabic 'buraq', which was the name for borax.",
     electron_configuration: "[He] 2s^2 2p^1",
+    atomic_radius: 1.92,
+    covalent_radius: 0.84,
+    electron_affinity: 26.989,
+    electronegativity: 2.04,
   },
   {
     name: "Carbon",
@@ -130,6 +147,10 @@ export default [
     uses: "Carbon is unique among the elements in its ability to form strongly bonded chains, sealed off by hydrogen atoms. These hydrocarbons, extracted naturally as fossil fuels (coal, oil and natural gas), are mostly used as fuels. A small but important fraction is used as a feedstock for the petrochemical industries producing polymers, fibres, paints, solvents and plastics etc.\n\n Impure carbon in the form of charcoal (from wood) and coke (from coal) is used in metal smelting. It is particularly important in the iron and steel industries.\n\n Graphite is used in pencils, to make brushes in electric motors and in furnace linings. Activated charcoal is used for purification and filtration. It is found in respirators and kitchen extractor hoods.\n\n Carbon fibre is finding many uses as a very strong, yet lightweight, material. It is currently used in tennis rackets, skis, fishing rods, rockets and aeroplanes.\n\n Industrial diamonds are used for cutting rocks and drilling. Diamond films are used to protect surfaces such as razor blades.\n\n The more recent discovery of carbon nanotubes, other fullerenes and atom-thin sheets of graphene has revolutionised hardware developments in the electronics industry and in nanotechnology generally.\n\n 150 years ago the natural concentration of carbon dioxide in the Earth’s atmosphere was 280 ppm. In 2013, as a result of combusting fossil fuels with oxygen, there was 390 ppm. Atmospheric carbon dioxide allows visible light in but prevents some infrared escaping (the natural greenhouse effect). This keeps the Earth warm enough to sustain life. However, an enhanced greenhouse effect is underway, due to a human-induced rise in atmospheric carbon dioxide. This is affecting living things as our climate changes.",
     name_origin: "The name is derived from the Latin ‘carbo’, charcoal",
     electron_configuration: "[He] 2s^2 2p^2",
+    atomic_radius: 1.7,
+    covalent_radius: 0.75,
+    electron_affinity: 121.776,
+    electronegativity: 2.55,
   },
   {
     name: "Nitrogen",
@@ -152,6 +173,9 @@ export default [
     name_origin:
       "The name is derived from the Greek 'nitron' and 'genes' meaning nitre forming.",
     electron_configuration: "[He] 2s^2 2p^3",
+    atomic_radius: 1.55,
+    covalent_radius: 0.71,
+    electronegativity: 3.04,
   },
   {
     name: "Oxygen",
@@ -175,6 +199,10 @@ export default [
     name_origin:
       "The name comes from the Greek 'oxy genes', meaning acid forming",
     electron_configuration: "[He] 2s^2 2p^4",
+    atomic_radius: 1.52,
+    covalent_radius: 0.64,
+    electron_affinity: 140.976,
+    electronegativity: 3.44,
   },
   {
     name: "Fluorine",
@@ -197,6 +225,10 @@ export default [
     discovered_by: "Henri Moissan",
     name_origin: "The name is derived form the Latin 'fluere', meaning to flow",
     electron_configuration: "[He] 2s^2 2p^5",
+    atomic_radius: 1.47,
+    covalent_radius: 0.6,
+    electron_affinity: 328.165,
+    electronegativity: 3.98,
   },
   {
     name: "Neon",
@@ -219,6 +251,8 @@ export default [
     discovered_by: "Sir William Ramsay and Morris Travers",
     name_origin: "The name comes from the Greek 'neos', meaning new.",
     electron_configuration: "[He] 2s^2 2p^6",
+    atomic_radius: 1.54,
+    covalent_radius: 0.62,
   },
   {
     name: "Sodium",
@@ -241,6 +275,10 @@ export default [
     discovered_by: "Humphry Davy",
     name_origin: "The name is derived from the English word 'soda'.",
     electron_configuration: "[Ne] 3s^1",
+    atomic_radius: 2.27,
+    covalent_radius: 1.6,
+    electron_affinity: 52.867,
+    electronegativity: 0.93,
   },
   {
     name: "Magnesium",
@@ -264,5 +302,8 @@ export default [
     name_origin:
       "The name is derived from Magnesia, a district of Eastern Thessaly in Greece.",
     electron_configuration: "[Ne] 3s^2",
+    atomic_radius: 1.73,
+    covalent_radius: 1.4,
+    electronegativity: 1.31,
   },
 ];
