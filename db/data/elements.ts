@@ -25,6 +25,7 @@ export default [
     covalent_radius: 0.32,
     electron_affinity: 72.769,
     electronegativity: 2.2,
+    key_isotope: 1,
   },
   {
     name: "Helium",
@@ -48,6 +49,7 @@ export default [
     electron_configuration: "1s^2",
     atomic_radius: 1.4,
     covalent_radius: 0.37,
+    key_isotope: 5,
   },
   {
     name: "Lithium",
@@ -74,6 +76,7 @@ export default [
     covalent_radius: 1.3,
     electron_affinity: 59.633,
     electronegativity: 0.98,
+    key_isotope: 7,
   },
   {
     name: "Beryllium",
@@ -100,6 +103,7 @@ export default [
     atomic_radius: 1.53,
     covalent_radius: 0.99,
     electronegativity: 1.57,
+    key_isotope: 8,
   },
   {
     name: "Boron",
@@ -127,6 +131,7 @@ export default [
     covalent_radius: 0.84,
     electron_affinity: 26.989,
     electronegativity: 2.04,
+    key_isotope: 10,
   },
   {
     name: "Carbon",
@@ -151,6 +156,7 @@ export default [
     covalent_radius: 0.75,
     electron_affinity: 121.776,
     electronegativity: 2.55,
+    key_isotope: 11,
   },
   {
     name: "Nitrogen",
@@ -176,6 +182,7 @@ export default [
     atomic_radius: 1.55,
     covalent_radius: 0.71,
     electronegativity: 3.04,
+    key_isotope: 14,
   },
   {
     name: "Oxygen",
@@ -203,6 +210,7 @@ export default [
     covalent_radius: 0.64,
     electron_affinity: 140.976,
     electronegativity: 3.44,
+    key_isotope: 16,
   },
   {
     name: "Fluorine",
@@ -229,6 +237,7 @@ export default [
     covalent_radius: 0.6,
     electron_affinity: 328.165,
     electronegativity: 3.98,
+    key_isotope: 19,
   },
   {
     name: "Neon",
@@ -253,6 +262,7 @@ export default [
     electron_configuration: "[He] 2s^2 2p^6",
     atomic_radius: 1.54,
     covalent_radius: 0.62,
+    key_isotope: 20,
   },
   {
     name: "Sodium",
@@ -279,6 +289,7 @@ export default [
     covalent_radius: 1.6,
     electron_affinity: 52.867,
     electronegativity: 0.93,
+    key_isotope: 23,
   },
   {
     name: "Magnesium",
@@ -305,5 +316,6 @@ export default [
     atomic_radius: 1.73,
     covalent_radius: 1.4,
     electronegativity: 1.31,
+    key_isotope: 24,
   },
 ];

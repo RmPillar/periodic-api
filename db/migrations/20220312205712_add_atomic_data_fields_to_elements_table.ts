@@ -11,9 +11,11 @@ export async function up(knex: Knex): Promise<void> {
 
 export async function down(knex: Knex): Promise<void> {
   return knex.schema.table("elements", (elementsTable) => {
-    elementsTable.dropColumn("atomic_radius");
-    elementsTable.dropColumn("covalent_radius");
-    elementsTable.dropColumn("electron_affinity");
-    elementsTable.dropColumn("electronegativity");
+    elementsTable.dropColumns(
+      "atomic_radius",
+      "covalent_radius",
+      "electron_affinity",
+      "electronegativity"
+    );
   });
 }

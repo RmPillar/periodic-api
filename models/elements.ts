@@ -76,11 +76,17 @@ export const fetchElements = async ({
   const ionisationEnergies = await connection("ionisation_energies").select(
     "*"
   );
+  const keyIsotope = isotopes.filter(
+    (isotope) => isotope.element_id === elements.element_id
+  );
 
   return elements.map((element) => {
     return {
       ...element,
       isotopes: isotopes.filter(
+        (isotope) => isotope.element_id === element.element_id
+      ),
+      key_isotope: isotopes.find(
         (isotope) => isotope.element_id === element.element_id
       ),
       oxidation_states: oxidationStates.filter(
