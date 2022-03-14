@@ -4,6 +4,7 @@ import { fetchElementsTypes } from "../types/models";
 import { modifyQuery } from "../utils";
 
 export const fetchElements = async ({
+  p = 1,
   sort_by = "element_id",
   order = "asc",
   limit = 10,
@@ -69,8 +70,9 @@ export const fetchElements = async ({
         modifyQuery(electronegativity, "electronegativity", query);
       }
     })
+    .orderBy(sort_by, order)
     .limit(limit)
-    .orderBy(sort_by, order);
+    .offset(p * limit - limit);
 
   const isotopes = await connection("isotopes").select("*");
   const oxidationStates = await connection("oxidation_states").select("*");

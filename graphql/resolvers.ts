@@ -6,6 +6,7 @@ const resolvers = {
     sort_by = "element_id",
     order = "asc",
     limit = 10,
+    p = 1,
     group,
     period,
     block,
@@ -25,6 +26,7 @@ const resolvers = {
       sort_by,
       order,
       limit,
+      p,
       group,
       period,
       block,
@@ -41,6 +43,7 @@ const resolvers = {
       electronegativity,
     });
   },
+
   element: ({ id }) => {
     return fetchElementsById(id);
   },
@@ -49,12 +52,21 @@ const resolvers = {
     return fetchIsotopesById(id);
   },
 
-  isotopes: ({ element_id, sort_by, order, limit, mass, neutron_number }) => {
+  isotopes: ({
+    element_id,
+    sort_by = "neutron_number",
+    order = "asc",
+    limit = 10,
+    p = 1,
+    mass,
+    neutron_number,
+  }) => {
     return fetchIsotopes({
       element_id,
       sort_by,
       order,
       limit,
+      p,
       mass,
       neutron_number,
     });

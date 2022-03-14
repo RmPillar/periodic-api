@@ -61,6 +61,7 @@ const schema = buildSchema(`
     elements(sort_by: String,
     order: String,
     limit: String,
+    p: Int,
     group: String,
     period: String,
     block: String,
@@ -81,7 +82,8 @@ const schema = buildSchema(`
     isotopes(element_id: Int,
     sort_by: String,
     order: String,
-    limit: String, 
+    limit: String,
+    p: Int, 
     mass: String,
     neutron_number: String,
     natural_abundance: String): [Isotope]

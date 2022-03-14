@@ -4,6 +4,7 @@ import { modifyQuery } from "../utils";
 
 export const fetchIsotopes = async ({
   element_id,
+  p = 1,
   sort_by = "isotope_id",
   order = "asc",
   limit = 10,
@@ -27,8 +28,9 @@ export const fetchIsotopes = async ({
         modifyQuery(neutron_number, "neutron_number", query);
       }
     })
+    .orderBy(sort_by, order)
     .limit(limit)
-    .orderBy(sort_by, order);
+    .offset(p * limit - limit);
 };
 
 export const fetchIsotopesById = async (isotope_id: string) => {
