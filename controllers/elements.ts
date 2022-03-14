@@ -9,7 +9,6 @@ export const getElements = (
 ): void => {
   fetchElements(query)
     .then((elements: ElementType[]) => {
-      // console.log(elements, "<<<<<<");
       res.status(200).send(elements);
     })
     .catch(next);

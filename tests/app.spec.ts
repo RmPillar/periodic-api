@@ -435,13 +435,13 @@ describe("/api", () => {
     });
     describe("/:element_id", () => {
       describe("GET", () => {
-        it("Status 200: returns requested element", async () => {
+        it.only("Status 200: returns requested element", async () => {
           const { body } = await request(app)
             .get("/api/elements/1")
             .expect(200);
 
-          expect(body).to.be.an("array");
-          expect(body[0]).to.include.keys(
+          expect(body).to.be.an("object");
+          expect(body).to.include.keys(
             "element_id",
             "name",
             "symbol",
@@ -461,7 +461,7 @@ describe("/api", () => {
             "uses",
             "electron_configuration"
           );
-          expect(body[0].element_id).to.be.equal(1);
+          expect(body.element_id).to.be.equal(1);
         });
         it("Status 404: responds with not found when requested element does not exist", async () => {
           const { body } = await request(app)

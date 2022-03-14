@@ -22,6 +22,7 @@ export const fetchElements = async ({
   electron_affinity,
   electronegativity,
 }: fetchElementsTypes) => {
+  console.log(sort_by);
   const elements = await connection("elements")
     .select("*")
     .modify((query) => {
@@ -76,9 +77,6 @@ export const fetchElements = async ({
   const ionisationEnergies = await connection("ionisation_energies").select(
     "*"
   );
-  const keyIsotope = isotopes.filter(
-    (isotope) => isotope.element_id === elements.element_id
-  );
 
   return elements.map((element) => {
     return {
@@ -99,18 +97,33 @@ export const fetchElements = async ({
   });
 };
 
-export const fetchElementsById = (
-  element_id: string
-): Promise<ElementType[]> => {
-  return connection("elements")
+export const fetchElementsById = async (element_id: string) => {
+  console.log(element_id);
+  const element = await connection("elements")
     .select("*")
-    .where({ element_id })
-    .then((elements) => {
-      if (elements.length === 0) {
-        return Promise.reject({
-          status: 404,
-          msg: "Element Not Found",
-        });
-      } else return elements;
+    .where({ element_id });
+
+  if (element.length === 0) {
+    return Promise.reject({
+      status: 404,
+      msg: "Element Not Found",
     });
+  }
+
+  const isotopes = await connection("isotopes")
+    .select("*")
+    .where({ element_id });
+  const oxidation_states = await connection("oxidation_states")
+    .select("*")
+    .where({ element_id });
+  const ionisation_energies = await connection("ionisation_energies")
+    .select("*")
+    .where({ element_id });
+
+  return {
+    ...element[0],
+    isotopes,
+    oxidation_states,
+    ionisation_energies,
+  };
 };

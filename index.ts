@@ -1,7 +1,10 @@
 import dotenv from "dotenv";
 import express from "express";
+import { graphqlHTTP } from "express-graphql";
 
 import apiRouter from "./routes/api";
+import schema from "./graphql/schema";
+import resolvers from "./graphql/resolvers";
 
 import {
   handle404s,
@@ -17,6 +20,15 @@ const app = express();
 
 app.use(express.json());
 app.use("/api", apiRouter);
+
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema: schema,
+    rootValue: resolvers,
+    graphiql: true,
+  })
+);
 
 app.all("/*", handle404s);
 app.use(handleCustomErrors);
