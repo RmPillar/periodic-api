@@ -435,7 +435,7 @@ describe("/api", () => {
     });
     describe("/:element_id", () => {
       describe("GET", () => {
-        it.only("Status 200: returns requested element", async () => {
+        it("Status 200: returns requested element", async () => {
           const { body } = await request(app)
             .get("/api/elements/1")
             .expect(200);
@@ -480,7 +480,7 @@ describe("/api", () => {
       });
     });
   });
-  describe("/isotopes", () => {
+  describe.only("/isotopes", () => {
     describe("GET", () => {
       it("Status 200: returns all isotopes", async () => {
         const { body } = await request(app).get("/api/isotopes").expect(200);
@@ -586,6 +586,15 @@ describe("/api", () => {
         const neutron_number = body.every((item) => item.neutron_number > 10);
 
         expect(neutron_number).to.be.true;
+      });
+      it("Status 200: returns all isotopes for a particular element id", async () => {
+        const { body } = await request(app)
+          .get("/api/isotopes?element_id=1")
+          .expect(200);
+
+        const element_id = body.every((item) => item.element_id == 1);
+
+        expect(element_id).to.be.true;
       });
     });
   });

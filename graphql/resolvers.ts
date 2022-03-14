@@ -1,5 +1,5 @@
 import { fetchElements, fetchElementsById } from "../models/elements";
-import { fetchIsotopes } from "../models/isotopes";
+import { fetchIsotopes, fetchIsotopesById } from "../models/isotopes";
 
 const resolvers = {
   elements: ({
@@ -44,8 +44,20 @@ const resolvers = {
   element: ({ id }) => {
     return fetchElementsById(id);
   },
-  isotopes: ({ sort_by, order, limit, mass, neutron_number }) => {
-    return fetchIsotopes({ sort_by, order, limit, mass, neutron_number });
+
+  isotope: ({ id }) => {
+    return fetchIsotopesById(id);
+  },
+
+  isotopes: ({ element_id, sort_by, order, limit, mass, neutron_number }) => {
+    return fetchIsotopes({
+      element_id,
+      sort_by,
+      order,
+      limit,
+      mass,
+      neutron_number,
+    });
   },
 };
 

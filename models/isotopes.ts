@@ -3,6 +3,7 @@ import { fetchIsotopesTypes } from "../types/models";
 import { modifyQuery } from "../utils";
 
 export const fetchIsotopes = async ({
+  element_id,
   sort_by = "isotope_id",
   order = "asc",
   limit = 10,
@@ -13,6 +14,9 @@ export const fetchIsotopes = async ({
   return connection("isotopes")
     .select("*")
     .modify((query) => {
+      if (element_id) {
+        query.where({ element_id });
+      }
       if (mass) {
         modifyQuery(mass, "mass", query);
       }
@@ -25,4 +29,19 @@ export const fetchIsotopes = async ({
     })
     .limit(limit)
     .orderBy(sort_by, order);
+};
+
+export const fetchIsotopesById = async (isotope_id: string) => {
+  const isotope = await connection("isotopes")
+    .select("*")
+    .where({ isotope_id });
+
+  if (isotope.length === 0) {
+    return Promise.reject({
+      status: 404,
+      msg: "Isotope Not Found",
+    });
+  }
+
+  return isotope[0];
 };

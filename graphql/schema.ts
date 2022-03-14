@@ -57,6 +57,7 @@ const schema = buildSchema(`
 
   type Query {
     element(id: ID!): Element
+
     elements(sort_by: String,
     order: String,
     limit: String,
@@ -73,8 +74,12 @@ const schema = buildSchema(`
     atomic_radius: String,
     covalent_radius: String,
     electron_affinity: String,
-    electronegativity: String): [Element],
-    isotopes(sort_by: String,
+    electronegativity: String): [Element]
+
+    isotope(id: ID!): Isotope
+
+    isotopes(element_id: Int,
+    sort_by: String,
     order: String,
     limit: String, 
     mass: String,
