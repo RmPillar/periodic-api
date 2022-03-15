@@ -339,4 +339,164 @@ export default [
     ionisation_energy: 25661.24,
     position: 8,
   },
+  {
+    element_id: 13,
+    ionisation_energy: 577.539,
+    position: 1,
+  },
+  {
+    element_id: 13,
+    ionisation_energy: 1816.679,
+    position: 2,
+  },
+  {
+    element_id: 13,
+    ionisation_energy: 2744.781,
+    position: 3,
+  },
+  {
+    element_id: 13,
+    ionisation_energy: 11577.469,
+    position: 4,
+  },
+  {
+    element_id: 13,
+    ionisation_energy: 14841.857,
+    position: 5,
+  },
+  {
+    element_id: 13,
+    ionisation_energy: 18379.49,
+    position: 6,
+  },
+  {
+    element_id: 13,
+    ionisation_energy: 23326.3,
+    position: 7,
+  },
+  {
+    element_id: 13,
+    ionisation_energy: 27465.52,
+    position: 8,
+  },
+  {
+    element_id: 14,
+    ionisation_energy: 786.518,
+    position: 1,
+  },
+  {
+    element_id: 14,
+    ionisation_energy: 1577.134,
+    position: 2,
+  },
+  {
+    element_id: 14,
+    ionisation_energy: 3231.585,
+    position: 3,
+  },
+  {
+    element_id: 14,
+    ionisation_energy: 4355.523,
+    position: 4,
+  },
+  {
+    element_id: 14,
+    ionisation_energy: 16090.571,
+    position: 5,
+  },
+  {
+    element_id: 14,
+    ionisation_energy: 19805.55,
+    position: 6,
+  },
+  {
+    element_id: 14,
+    ionisation_energy: 23783.6,
+    position: 7,
+  },
+  {
+    element_id: 14,
+    ionisation_energy: 29287.16,
+    position: 8,
+  },
+  {
+    element_id: 15,
+    ionisation_energy: 1011.812,
+    position: 1,
+  },
+  {
+    element_id: 15,
+    ionisation_energy: 1907.467,
+    position: 2,
+  },
+  {
+    element_id: 15,
+    ionisation_energy: 2914.118,
+    position: 3,
+  },
+  {
+    element_id: 15,
+    ionisation_energy: 4963.582,
+    position: 4,
+  },
+  {
+    element_id: 15,
+    ionisation_energy: 6273.969,
+    position: 5,
+  },
+  {
+    element_id: 15,
+    ionisation_energy: 21267.395,
+    position: 6,
+  },
+  {
+    element_id: 15,
+    ionisation_energy: 25430.64,
+    position: 7,
+  },
+  {
+    element_id: 15,
+    ionisation_energy: 29871.9,
+    position: 8,
+  },
+  {
+    element_id: 16,
+    ionisation_energy: 999.589,
+    position: 1,
+  },
+  {
+    element_id: 16,
+    ionisation_energy: 2251.763,
+    position: 2,
+  },
+  {
+    element_id: 16,
+    ionisation_energy: 3356.72,
+    position: 3,
+  },
+  {
+    element_id: 16,
+    ionisation_energy: 4556.231,
+    position: 4,
+  },
+  {
+    element_id: 16,
+    ionisation_energy: 7004.305,
+    position: 5,
+  },
+  {
+    element_id: 16,
+    ionisation_energy: 8495.824,
+    position: 6,
+  },
+  {
+    element_id: 16,
+    ionisation_energy: 27107.363,
+    position: 7,
+  },
+  {
+    element_id: 16,
+    ionisation_energy: 31719.56,
+    position: 8,
+  },
 ];

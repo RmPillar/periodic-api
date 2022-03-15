@@ -95,4 +95,44 @@ export default [
     element_id: 12,
     oxidation_state: 2,
   },
+  {
+    element_id: 13,
+    oxidation_state: 3,
+  },
+  {
+    element_id: 14,
+    oxidation_state: 4,
+  },
+  {
+    element_id: 14,
+    oxidation_state: -4,
+  },
+  {
+    element_id: 15,
+    oxidation_state: 5,
+  },
+  {
+    element_id: 15,
+    oxidation_state: 3,
+  },
+  {
+    element_id: 15,
+    oxidation_state: -3,
+  },
+  {
+    element_id: 16,
+    oxidation_state: 6,
+  },
+  {
+    element_id: 16,
+    oxidation_state: 4,
+  },
+  {
+    element_id: 16,
+    oxidation_state: 2,
+  },
+  {
+    element_id: 16,
+    oxidation_state: -2,
+  },
 ];
